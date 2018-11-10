@@ -7,7 +7,7 @@ RUN dotnet restore
 
 # copy and build everything else
 COPY . ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o /out
 
 FROM microsoft/dotnet:runtime
 WORKDIR /app
