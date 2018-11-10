@@ -9,6 +9,7 @@ namespace restconnector
     {
         static void Main(string[] args)
         {
+			Console.WriteLine("start");
             try
             {
                 using (var httpClient = new HttpClient())

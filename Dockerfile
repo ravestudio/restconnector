@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:sdk
+FROM microsoft/dotnet:sdk AS build-env
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -8,4 +8,9 @@ RUN dotnet restore
 # copy and build everything else
 COPY . ./
 RUN dotnet publish -c Release -o out
-ENTRYPOINT ["dotnet", "out/restconnector.dll"]
+
+FROM microsoft/dotnet:runtime
+WORKDIR /app
+COPY --from=build-env /out .
+
+ENTRYPOINT ["dotnet", "restconnector.dll"]
